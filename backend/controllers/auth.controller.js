@@ -77,7 +77,7 @@ export const login = async (req, res) => {
 			username: user.username,
 			profilePic: user.profilePic,
 		});
-    
+
   } catch (error) {
     console.log("There is an error in login route", error.message);
     res.status(500).json({ error: "Internal Server Error" });
@@ -85,6 +85,12 @@ export const login = async (req, res) => {
 }
 
 export const logout = (req, res) => {
-    res.send('Logout Route');
-    console.log('Logout user');
+ try {
+    res.cookie('jwt', '', { maxAge: 0 });
+    res.status(200).json({ message: "User logged out successfully" });
+
+ } catch (error) {
+    console.log("There is an error in logout route", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+ }
 }
