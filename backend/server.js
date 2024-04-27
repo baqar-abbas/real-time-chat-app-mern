@@ -19,10 +19,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/users', userRoutes);
 
-// app.get('/', (req, res) => {
-//     res.send('Hello from Express');
-// })
-
 // Listen to the requests and connect to Mongo DB Atlas cluster
 app.listen(PORT, () => {
     connectToMongoDb();
