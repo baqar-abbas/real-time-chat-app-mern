@@ -57,12 +57,34 @@ export const signup = async (req, res) => {
   }
 }
 
+export const login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({username});
+    const isPasswordCorrect = await bcrypt.compare(password, user?.password || '');
+
+    if(!user || !isPasswordCorrect) {
+      return res.status(400).json({ error: "User name or Password in invalid!" });
+    }
+
+    // Generate jwt token
+    generateTokenAndSetCookie(user._id, res);
+
+    res.status(200).json({
+			_id: user._id,
+			fullName: user.fullName,
+			username: user.username,
+			profilePic: user.profilePic,
+		});
+    
+  } catch (error) {
+    console.log("There is an error in login route", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 export const logout = (req, res) => {
     res.send('Logout Route');
     console.log('Logout user');
-}
-
-export const login = (req, res) => {
-    res.send('Sign Up Route');
-    console.log('Sign up user');
 }
