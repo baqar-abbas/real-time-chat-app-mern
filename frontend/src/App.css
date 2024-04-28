@@ -4,9 +4,17 @@ body {
 	background-size: cover;
 	background-position: center;
 	min-height: 100vh;
+	overflow-x: hidden;
 }
 
 /* dark mode looking scrollbar */
+/* For Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #121212 #555;
+  }
+
+  /* For Chrome, Safari, and Opera */
 ::-webkit-scrollbar {
 	width: 8px;
 }
@@ -64,12 +72,13 @@ body {
 		overflow-y: scroll !important;
 		width: 90vw !important;
 	}
-
+	
 	body {
 		background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/bg.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;
 		height: 105vh;
+		overflow-x: hidden;
 	}
 }
